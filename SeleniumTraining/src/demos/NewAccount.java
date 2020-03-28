@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import util.WebDriverFactory;
+
 public class NewAccount {
   public static void main(String[] args) {
     WebDriver driver;
@@ -23,17 +25,7 @@ public class NewAccount {
     String browserType = "chrome";
 
     // 1. Create WebDriver
-    if (browserType.equals("chrome")) {
-      System.setProperty("webdriver.chrome.driver",
-          "C:\\Users\\BRINK\\Selenium\\chromedriver.exe");
-
-      // instantiate a new WebDriver object as a ChromeDriver
-      driver = new ChromeDriver();
-    } else {
-      System.setProperty("webdriver.gecko.driver",
-          "C:\\Users\\BRINK\\Selenium\\geckodriver.exe");
-      driver = new FirefoxDriver();
-    }
+    driver = WebDriverFactory.getDriver(browserType);
 
     // 2. Navigate to Acct Mgmt Page >> Click on Create Account
     driver.get(
