@@ -24,16 +24,17 @@ public class CreateNewAccount {
 
 		// Instantiate a webdriver using the WebDriverFactory class that we created
 		WebDriver driver = WebDriverFactory.getDriver(browserType);
-		
+
 		// Navigate to Acct Mgmt Page >> Click on Create Account
 		driver.get("http://sdettraining.com/trguitransactions/accountmanagement.aspx");
 		driver.findElement(By.linkText("CREATE ACCOUNT")).click();
-		
+
 		// Cache web elements in WebElement objects
 		WebElement nameInput = driver.findElement(By.name("ctl00$MainContent$txtFirstName"));
 		WebElement emailInput = driver.findElement(By.id("MainContent_txtEmail"));
 		WebElement homePhoneInput = driver.findElement(By.xpath("//*[@id=\"MainContent_txtHomePhone\"]"));
-		WebElement passwordInput = driver.findElement(By.cssSelector("input[type='password'][id='MainContent_txtPassword']"));
+		WebElement passwordInput = driver
+				.findElement(By.cssSelector("input[type='password'][id='MainContent_txtPassword']"));
 		WebElement verifyPasswordInput = driver.findElement(By.name("ctl00$MainContent$txtVerifyPassword"));
 		WebElement maleGenderRadioButton = driver.findElement(By.id("MainContent_Male"));
 		WebElement femaleGenderRadioButton = driver.findElement(By.id("MainContent_Female"));
@@ -43,61 +44,61 @@ public class CreateNewAccount {
 		WebElement occassionalEmailCheckBox = driver.findElement(By.id("MainContent_checkOccassionalEmail"));
 		WebElement submitButton = driver.findElement(By.id("MainContent_btnSubmit"));
 		WebElement transactionConfirmation = driver.findElement(By.id("MainContent_lblTransactionResult"));
-		
+
 		// Fill out the form
 		nameInput.sendKeys(name);
 		emailInput.sendKeys(email);
 		homePhoneInput.sendKeys(phoneNumber);
 		passwordInput.sendKeys(password);
 		verifyPasswordInput.sendKeys(password);
-		
+
 		if (gender.equalsIgnoreCase("male")) {
 			maleGenderRadioButton.click();
 		} else {
 			femaleGenderRadioButton.click();
 		}
-		
+
 		// note that we create a new Select object to access the dropdown items
 		new Select(countrySelect).selectByValue(country);
-		
-		if(weeklyEmail) {
-			if(!weeklyEmailCheckBox.isSelected()) {
-				weeklyEmailCheckBox.click();
-			} 
-		} else {
-			if(weeklyEmailCheckBox.isSelected()) {
+
+		if (weeklyEmail) {
+			if (!weeklyEmailCheckBox.isSelected()) {
 				weeklyEmailCheckBox.click();
 			}
-		}
-		
-		if(monthlyEmail) {
-			if(!monthlyEmailCheckBox.isSelected()) {
-				monthlyEmailCheckBox.click();
-			} 
 		} else {
-			if(monthlyEmailCheckBox.isSelected()) {
+			if (weeklyEmailCheckBox.isSelected()) {
+				weeklyEmailCheckBox.click();
+			}
+		}
+
+		if (monthlyEmail) {
+			if (!monthlyEmailCheckBox.isSelected()) {
+				monthlyEmailCheckBox.click();
+			}
+		} else {
+			if (monthlyEmailCheckBox.isSelected()) {
 				monthlyEmailCheckBox.click();
 			}
 		}
-		
-		if(occassionalEmail) {
-			if(!occassionalEmailCheckBox.isSelected()) {
+
+		if (occassionalEmail) {
+			if (!occassionalEmailCheckBox.isSelected()) {
 				occassionalEmailCheckBox.click();
-			} 
+			}
 		} else {
-			if(occassionalEmailCheckBox.isSelected()) {
+			if (occassionalEmailCheckBox.isSelected()) {
 				occassionalEmailCheckBox.click();
 			}
 		}
-		
+
 		submitButton.click();
 
-		// Get Confirmation
-		boolean conf = transactionConfirmation.getText()
-				.equals("Customer information added successfully");
-
-		// Print result
-		System.out.println("CONFIRMATION: " + conf);
+		// Check confirmation message
+		if (transactionConfirmation.getText().equals("Customer information added successfully")) {
+			System.out.println("Create account successful");
+		} else {
+			System.out.println("Create account failed");
+		}
 
 		// Close the browser
 		driver.close();
