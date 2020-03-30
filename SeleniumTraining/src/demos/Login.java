@@ -37,7 +37,7 @@ public class Login {
     System.out.println("PAGE TITLE: " + pageTitle);
     
     // 7. Close the browser
-    driver.close();
+    driver.quit();
   }
 
 }

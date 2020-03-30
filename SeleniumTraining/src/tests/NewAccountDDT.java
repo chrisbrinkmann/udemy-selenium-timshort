@@ -105,7 +105,7 @@ public class NewAccountDDT {
 	@After
 	public void testTearDown() {
 		System.out.println("Tearing down the tests");
-		driver.close();
+		driver.quit();
 	}
 
 	// This annotated method is designed to pass params into the class via

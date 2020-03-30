@@ -101,6 +101,6 @@ public class CreateNewAccount {
 		}
 
 		// Close the browser
-		driver.close();
+		driver.quit();
 	}
 }
