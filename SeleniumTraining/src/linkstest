@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Google Tests" parallel="false">
+  <test name="Link Test">
+    <classes>
+      <class name="smoketests.LinksTest"/>
+    </classes>
+  </test> <!-- Test -->
+    <test name="Logo Test">
+    <classes>
+      <class name="smoketests.PageLogoTestNG"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
