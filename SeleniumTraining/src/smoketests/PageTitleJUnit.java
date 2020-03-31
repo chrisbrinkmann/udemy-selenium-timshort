@@ -1,13 +1,9 @@
 package smoketests;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import util.WebDriverFactory;
@@ -28,16 +24,16 @@ public class PageTitleJUnit {
 		driver.get(url);
 		String actualTitle = driver.getTitle();	
 		
-		Assertions.assertEquals(expectedTitle, actualTitle);
+		Assert.assertEquals(expectedTitle, actualTitle);
 	}
 	
-	@BeforeEach
+	@Before
 	public void testSetUp() {
 		System.out.println("Setting up the tests");
 		driver = WebDriverFactory.getDriver("firefox");
 	}
 	
-	@AfterEach
+	@After
 	public void testTearDown() {
 		System.out.println("Tearing down the tests");
 		driver.close();
